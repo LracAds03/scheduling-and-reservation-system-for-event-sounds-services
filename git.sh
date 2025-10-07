@@ -1,19 +1,15 @@
 #!/bin/bash
 # -----------------------------------------
-# Auto Save + Git Push Script
-# Saves all modified files, commits, and pushes
+# Git Auto Commit + Push Script (No VS Code launch)
 # -----------------------------------------
 
-# Save all modified files in VS Code (if VS Code is running)
-if command -v code &> /dev/null; then
-  echo "💾 Saving all open files in VS Code..."
-  code --save-all 2>/dev/null
-fi
+# Go to script directory (so it runs from project folder)
+cd "$(dirname "$0")"
 
 # Stage all changes
 git add .
 
-# Create a timestamp
+# Create a timestamp for the commit message
 timestamp=$(date +"%Y-%m-%d %H:%M:%S")
 
 # Commit automatically
@@ -22,5 +18,5 @@ git commit -m "💾 Auto commit on $timestamp"
 # Push to main branch
 git push origin main
 
-# Done!
-echo "✅ Code auto-saved, committed, and pushed on $timestamp!"
+# Done message
+echo "✅ Auto-committed and pushed changes on $timestamp!"
