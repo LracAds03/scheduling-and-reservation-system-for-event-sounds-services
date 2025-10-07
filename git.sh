@@ -1,22 +1,29 @@
 #!/bin/bash
 # -----------------------------------------
-# Git Auto Commit + Push Script (No VS Code launch)
+# Git Auto Commit + Push Script with Message
 # -----------------------------------------
 
-# Go to script directory (so it runs from project folder)
+# Go to script directory (project root)
 cd "$(dirname "$0")"
 
 # Stage all changes
 git add .
 
-# Create a timestamp for the commit message
+# Ask for a custom commit message
+echo "📝 Enter your commit message:"
+read commit_message
+
+# Add a timestamp
 timestamp=$(date +"%Y-%m-%d %H:%M:%S")
 
-# Commit automatically
-git commit -m "💾 Auto commit on $timestamp"
+# Combine message + timestamp
+full_message="💾 $commit_message (committed on $timestamp)"
+
+# Commit changes
+git commit -m "$full_message"
 
 # Push to main branch
 git push origin main
 
 # Done message
-echo "✅ Auto-committed and pushed changes on $timestamp!"
+echo "✅ Successfully pushed: '$commit_message' at $timestamp!"
